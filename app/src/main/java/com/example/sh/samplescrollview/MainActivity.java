@@ -12,29 +12,17 @@ import android.widget.ScrollView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ScrollView scrollView01;
     ImageView imageView01;
-    BitmapDrawable bitmap;
+    ImageView imageView02;
+    Boolean imageIndex = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        scrollView01 = (ScrollView) findViewById(R.id.scrollView01);
         imageView01 = (ImageView) findViewById(R.id.imageView01);
-        Button button01 = (Button) findViewById(R.id.Button01);
-
-        scrollView01.setHorizontalScrollBarEnabled(true);
-
-        Resources res = getResources();
-        bitmap = (BitmapDrawable) res.getDrawable(R.drawable.image01);
-        int bitmapWidth = bitmap.getIntrinsicWidth();
-        int bitmapHeight = bitmap.getIntrinsicHeight();
-
-        imageView01.setImageDrawable(bitmap);
-        imageView01.getLayoutParams().width = bitmapWidth;
-        imageView01.getLayoutParams().height = bitmapHeight;
+        imageView02 = (ImageView) findViewById(R.id.imageView02);
     }
 
     public void onButton1Clicked(View v){
@@ -42,14 +30,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeImage(){
-        Resources res = getResources();
-        bitmap = (BitmapDrawable) res.getDrawable(R.drawable.image02);
-        int bitmapWidth = bitmap.getIntrinsicWidth();
-        int bitmapHeight = bitmap.getIntrinsicHeight();
 
-        imageView01.setImageDrawable(bitmap);
-        imageView01.getLayoutParams().width = bitmapWidth;
-        imageView01.getLayoutParams().height = bitmapHeight;
-
+        if(!imageIndex) {
+            imageView01.setVisibility(View.VISIBLE);
+            imageView02.setVisibility(View.INVISIBLE);
+            imageIndex = true;
+        }else if (imageIndex)
+        {
+            imageView01.setVisibility(View.INVISIBLE);
+            imageView02.setVisibility(View.VISIBLE);
+            imageIndex = false;
+        }
     }
 }
